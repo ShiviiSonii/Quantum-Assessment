@@ -1,41 +1,115 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Protected = () => {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/login');  
-    } else {
-      const userData = JSON.parse(localStorage.getItem('user'));
-      setUser(userData);
+      navigate('/login'); 
     }
   }, [navigate]);
 
-  if (!user) return null;
-
   return (
-    <div>
-      <h1>Welcome, {user.name}</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Date of Birth</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.dob}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div className="flex items-center justify-center min-h-screen p-4">
+      <div className="w-full max-w-4xl p-6">
+        <h1 className="text-3xl font-bold mb-6">Data Table</h1>
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+          <table className="min-w-full text-sm text-left text-gray-500">
+            <thead className="text-xs text-white uppercase bg-black">
+              <tr>
+                <th scope="col" className="px-6 py-3">
+                  Name
+                </th>
+                <th scope="col" className="px-6 py-3 min-w-[150px]"> 
+                  Date of Birth
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Email
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Password
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Alice Johnson
+                </td>
+                <td className="px-6 py-4">1990-05-12</td>
+                <td className="px-6 py-4">alice@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Bob Smith
+                </td>
+                <td className="px-6 py-4">1985-09-23</td>
+                <td className="px-6 py-4">bob@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Carol Lee
+                </td>
+                <td className="px-6 py-4">1992-11-30</td>
+                <td className="px-6 py-4">carol@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Alice Johnson
+                </td>
+                <td className="px-6 py-4">1990-05-12</td>
+                <td className="px-6 py-4">alice@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Bob Smith
+                </td>
+                <td className="px-6 py-4">1985-09-23</td>
+                <td className="px-6 py-4">bob@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Carol Lee
+                </td>
+                <td className="px-6 py-4">1992-11-30</td>
+                <td className="px-6 py-4">carol@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Alice Johnson
+                </td>
+                <td className="px-6 py-4">1990-05-12</td>
+                <td className="px-6 py-4">alice@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white border-b hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Bob Smith
+                </td>
+                <td className="px-6 py-4">1985-09-23</td>
+                <td className="px-6 py-4">bob@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+              <tr className="bg-white hover:bg-gray-50 cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  Carol Lee
+                </td>
+                <td className="px-6 py-4">1992-11-30</td>
+                <td className="px-6 py-4">carol@example.com</td>
+                <td className="px-6 py-4">199012</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
