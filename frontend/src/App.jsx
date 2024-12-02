@@ -5,7 +5,6 @@ import Login from "./pages/Login.jsx"
 import Protected from "./pages/Protected.jsx"
 
 function App() {
-  
   return (
     <>
       <BrowserRouter>
