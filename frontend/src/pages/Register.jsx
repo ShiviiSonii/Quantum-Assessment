@@ -9,6 +9,7 @@ const Register = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(''); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -28,6 +29,7 @@ const Register = () => {
       navigate('/protected');
     } catch (error) {
       console.error('Error during registration:', error);
+      setError(error.response?.data?.message || 'An error occurred during registration');
     }
   };
 
@@ -111,7 +113,7 @@ const Register = () => {
               />
             </div>
           </div>
-
+          {error && <div className="mt-4 text-sm text-red-500">{error}</div>}
           <div>
             <button
               type="submit"
@@ -121,12 +123,13 @@ const Register = () => {
             </button>
           </div>
         </form>
+
         <p className="mt-10 text-center text-sm/6 text-gray-500">
-            Already have a account?{' '}
-            <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Login
-            </Link>
-          </p>
+          Already have an account?{' '}
+          <Link to="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">
+            Login
+          </Link>
+        </p>
       </div>
     </div>
   );

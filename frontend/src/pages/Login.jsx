@@ -7,6 +7,7 @@ const Login = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(''); 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -14,6 +15,7 @@ const Login = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    setError(''); 
   };
 
   const handleSubmit = async (e) => {
@@ -26,6 +28,9 @@ const Login = () => {
       navigate('/protected');
     } catch (error) {
       console.error('Error during login:', error);
+      setError(
+        error.response?.data?.message || 'An error occurred. Please try again later.'
+      ); 
     }
   };
 
@@ -75,6 +80,12 @@ const Login = () => {
             </div>
           </div>
 
+          {error && (
+            <div className="mt-2 text-sm text-red-600">
+              {error}
+            </div>
+          )}
+
           <div>
             <button
               type="submit"
@@ -85,7 +96,7 @@ const Login = () => {
           </div>
         </form>
 
-        <p className="mt-10 text-center text-sm/6 text-gray-500">
+        <p className="mt-6 text-center text-sm/6 text-gray-500">
           Don’t have an account?{' '}
           <a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500">
             Register now

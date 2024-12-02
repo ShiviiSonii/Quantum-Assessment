@@ -6,14 +6,14 @@ export const registerUser = async (req, res) => {
   const { name, dob, email, password } = req.body;
 
   if (!name || !dob || !email || !password) {
-    return res.status(400).json({ error: "All fields are required!" });
+    return res.status(400).json({ message: "All fields are required!" });
   }
 
   try {
     const existedUser = await User.findOne({ email });
 
     if (existedUser) {
-      return res.status(409).json({ error: "User already exists!" });
+      return res.status(409).json({ message: "User already exists!" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -34,7 +34,9 @@ export const registerUser = async (req, res) => {
       message: "User registered successfully!",
     });
   } catch (err) {
-    return res.status(500).json({ error: "Error while registering the user" });
+    return res
+      .status(500)
+      .json({ message: "Error while registering the user" });
   }
 };
 
@@ -42,20 +44,22 @@ export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required!" });
+    return res
+      .status(400)
+      .json({ message: "Email and password are required!" });
   }
 
   try {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ error: "User doesnot exists!" });
+      return res.status(401).json({ message: "User doesnot exists!" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(401).json({ error: "Invalid credentials!" });
+      return res.status(401).json({ message: "Invalid credentials!" });
     }
 
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
@@ -68,6 +72,6 @@ export const loginUser = async (req, res) => {
       message: "Login successful!",
     });
   } catch (err) {
-    return res.status(500).json({ error: "Error while logging in!" });
+    return res.status(500).json({ message: "Error while logging in!" });
   }
 };
