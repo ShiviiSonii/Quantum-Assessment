@@ -40,10 +40,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-500">
       <div
-        className="w-96 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 relative"
-        style={{
-          backgroundColor: "rgba(255, 255, 255, 0.3)",
-        }}
+        className="w-96 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 relative bg-teal-100"
       >
         <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-32 h-12 bg-teal-500 text-white text-center rounded-lg flex items-center justify-center shadow-md">
           LOGIN
@@ -86,7 +83,7 @@ const Login = () => {
           </form>
           <p className="mt-4 text-center text-sm text-gray-600">
             Don’t have an account?{" "}
-            <a href="/" className="text-teal-500 font-bold">
+            <a href="/" className="text-teal-500 font-semibold">
               Register now
             </a>
           </p>
