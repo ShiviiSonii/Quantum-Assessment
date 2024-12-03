@@ -13,7 +13,7 @@ const Protected = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4">
-      <div className="w-full max-w-4xl p-6">
+      <div className="w-full max-w-5xl p-6">
         <h1 className="text-3xl font-bold mb-6">Data Table</h1>
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="min-w-full text-sm text-left text-gray-500">

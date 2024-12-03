@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
-  const [error, setError] = useState(''); 
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,40 +15,42 @@ const Login = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    setError(''); 
+    setError(""); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/api/user/login', formData);
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-      navigate('/protected');
+      const response = await axios.post(
+        "http://localhost:8000/api/user/login",
+        formData
+      );
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      navigate("/protected");
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error("Error during login:", error);
       setError(
-        error.response?.data?.message || 'An error occurred. Please try again later.'
-      ); 
+        error.response?.data?.message || "An error occurred. Please try again later."
+      );
     }
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-          Sign in to your account
-        </h2>
-      </div>
-
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
-              Email Address
-            </label>
-            <div className="mt-2">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-b from-teal-50 to-teal-500">
+      <div
+        className="w-96 backdrop-blur-md rounded-lg shadow-lg border border-white/20 p-6 relative"
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+        }}
+      >
+        <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-32 h-12 bg-teal-500 text-white text-center rounded-lg flex items-center justify-center shadow-md">
+          LOGIN
+        </div>
+        <div className="flex flex-col items-center mt-8">
+          <form onSubmit={handleSubmit} className="w-full mt-6 space-y-4">
+            <div>
               <input
                 id="email"
                 name="email"
@@ -57,16 +59,10 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 required
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                className="w-full px-5 py-3 rounded-lg border border-teal-500 bg-teal-100 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 ease-in-out"
               />
             </div>
-          </div>
-
-          <div>
-            <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">
-              Password
-            </label>
-            <div className="mt-2">
+            <div>
               <input
                 id="password"
                 name="password"
@@ -75,33 +71,26 @@ const Login = () => {
                 onChange={handleChange}
                 placeholder="Password"
                 required
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                className="w-full px-5 py-3 rounded-lg border border-teal-500 bg-teal-100 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 transition duration-300 ease-in-out"
               />
             </div>
-          </div>
-
-          {error && (
-            <div className="mt-2 text-sm text-red-600">
-              {error}
+            {error && <div className="text-red-500 text-sm">{error}</div>}
+            <div>
+              <button
+                type="submit"
+                className="w-full py-2 bg-teal-500/90 rounded-md text-white font-semibold hover:bg-teal-400 transition duration-300 ease-in-out"
+              >
+                Login
+              </button>
             </div>
-          )}
-
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Login
-            </button>
-          </div>
-        </form>
-
-        <p className="mt-6 text-center text-sm/6 text-gray-500">
-          Don’t have an account?{' '}
-          <a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500">
-            Register now
-          </a>
-        </p>
+          </form>
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Don’t have an account?{" "}
+            <a href="/" className="text-teal-500 font-bold">
+              Register now
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
